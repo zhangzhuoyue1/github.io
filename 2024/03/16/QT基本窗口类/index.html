@@ -16,24 +16,22 @@
   <meta name="author" content="�Һ���˯��">
   <meta name="keywords" content="">
   
-    <meta name="description" content="链表是一种物理存储结构上非连续，非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针连接顺序实现的。  优点 按需申请空间，不用了就释放空间 头部中间插入数据不需要挪动数据 不存在空间浪费   缺点：  每一个数据，都要存一个指针去链接后面节点，不支持随机访问。    练习题206.反转链表给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。输入：head &#x3D; [1,2,">
+    <meta name="description" content="QWidget类特点：  QWiget是所有窗口类的基类。  可以内嵌到其他窗口的内部-无边框（需要给该窗口指定父窗口）   12&#x2F;&#x2F;如果创建窗口时，给其指定了父对象，这个窗口不是一个独立窗口TestWidget* w&#x3D;new TestWidget(this);   可以作为独立的窗口显示-有边框（不能给该窗口指定父窗口）  123456&#x2F;&#x2F;一般在Qt的构造函数进行初始化操作（窗口，数据。。）&#x2F;&#x2F;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="链表">
-<meta property="og:url" content="http://example.com/2024/01/21/%E9%93%BE%E8%A1%A8/index.html">
+<meta property="og:title" content="QT基本窗口类">
+<meta property="og:url" content="http://example.com/2024/03/16/QT%E5%9F%BA%E6%9C%AC%E7%AA%97%E5%8F%A3%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="链表是一种物理存储结构上非连续，非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针连接顺序实现的。  优点 按需申请空间，不用了就释放空间 头部中间插入数据不需要挪动数据 不存在空间浪费   缺点：  每一个数据，都要存一个指针去链接后面节点，不支持随机访问。    练习题206.反转链表给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。输入：head &#x3D; [1,2,">
+<meta property="og:description" content="QWidget类特点：  QWiget是所有窗口类的基类。  可以内嵌到其他窗口的内部-无边框（需要给该窗口指定父窗口）   12&#x2F;&#x2F;如果创建窗口时，给其指定了父对象，这个窗口不是一个独立窗口TestWidget* w&#x3D;new TestWidget(this);   可以作为独立的窗口显示-有边框（不能给该窗口指定父窗口）  123456&#x2F;&#x2F;一般在Qt的构造函数进行初始化操作（窗口，数据。。）&#x2F;&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/image-1.png">
-<meta property="article:published_time" content="2024-01-21T06:28:41.000Z">
-<meta property="article:modified_time" content="2024-03-07T10:31:14.402Z">
+<meta property="article:published_time" content="2024-03-16T02:35:52.000Z">
+<meta property="article:modified_time" content="2024-03-18T11:39:31.805Z">
 <meta property="article:author" content="�Һ���˯��">
-<meta property="article:tag" content="链表">
+<meta property="article:tag" content="Qt">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/image-1.png">
   
   
   
-  <title>链表 - Hexo</title>
+  <title>QT基本窗口类 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="链表"></span>
+            <span id="subtitle" data-typed-text="QT基本窗口类"></span>
           
         </div>
 
@@ -210,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-21 14:28" pubdate>
-          2024年1月21日 下午
+        <time datetime="2024-03-16 10:35" pubdate>
+          2024年3月16日 上午
         </time>
       </span>
     
@@ -222,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          2.1k 字
         
       </span>
     
@@ -233,7 +231,7 @@
         
         
         
-          10 分钟
+          18 分钟
         
       </span>
     
@@ -270,30 +268,54 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">链表</h1>
+            <h1 id="seo-header">QT基本窗口类</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><p>是一种物理存储结构上非连续，非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针连接顺序实现的。</p>
+                <h2 id="QWidget类"><a href="#QWidget类" class="headerlink" title="QWidget类"></a>QWidget类</h2><p>特点：</p>
 <ul>
-<li>优点<ul>
-<li>按需申请空间，不用了就释放空间</li>
-<li>头部中间插入数据不需要挪动数据</li>
-<li>不存在空间浪费</li>
-</ul>
+<li><p>QWiget是所有窗口类的基类。</p>
 </li>
-<li>缺点： <ul>
-<li>每一个数据，都要存一个指针去链接后面节点，不支持随机访问。</li>
-</ul>
+<li><p>可以内嵌到其他窗口的内部-无边框（需要给该窗口指定父窗口）</p>
 </li>
 </ul>
-<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><h2 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206.反转链表"></a>206.反转链表</h2><p>给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。<br><img src="/image-1.png" srcset="/img/loading.gif" lazyload alt="Alt text"><br>输入：head &#x3D; [1,2,3,4,5]<br>输出：[5,4,3,2,1]</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs haxe"><span class="hljs-comment">//如果创建窗口时，给其指定了父对象，这个窗口不是一个独立窗口</span><br>TestWidget* w=<span class="hljs-keyword">new</span> <span class="hljs-type">TestWidget</span>(<span class="hljs-built_in">this</span>);<br></code></pre></td></tr></table></figure>
+
 <ul>
-<li>解题思路：<br>定义三个ListNode*类型，cur为链表，pre为反转后的链表，next用于存储下一节点。<br><br>初始时原链表为：1-&gt;2-&gt;3-&gt;4-&gt;5,反转后的链表和next都为空<br>进入循环后，令next-&gt;2;此时cur-&gt;1结点，令cur-&gt;next&#x3D;nullptr，则原链表变为[1];<br>令pre &#x3D; cur则反转后的链表为[1],再将cur &#x3D; next则原链表为[2,3,4,5]<br>进行第二次循环时，next-&gt;3结点此时令cur-&gt;next&#x3D;pre,则原链表为2-&gt;1<br>pre &#x3D; cur  cur &#x3D; next在执行这俩条语句后，pre为2-&gt;1，实现了初步反转。<br>继续循换可实现整体反转，时间复杂度为O(N)，空间复杂度O(1)。<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    ListNode* reverseList(ListNode* head) &#123;<br>	ListNode* pre = nullptr;<br>	ListNode* cur = head;<br>	ListNode* <span class="hljs-keyword">next</span> = nullptr;<br>	<span class="hljs-keyword">while</span> (cur)<br>	&#123;<br>		<span class="hljs-keyword">next</span> = cur-&gt;<span class="hljs-keyword">next</span>;<br>		cur-&gt;<span class="hljs-keyword">next</span> = pre;<br>		pre = cur;<br>        cur = <span class="hljs-keyword">next</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> pre;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li>可以作为独立的窗口显示-有边框（不能给该窗口指定父窗口）</li>
 </ul>
-<h2 id="876-链表的中间结点"><a href="#876-链表的中间结点" class="headerlink" title="876. 链表的中间结点"></a>876. 链表的中间结点</h2><p>给你单链表的头结点 head ，请你找出并返回链表的中间结点。<br>如果有两个中间结点，则返回第二个中间结点。</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs routeros">class Solution &#123;<br>public:<br>    ListNode* middleNode(ListNode* head) &#123;<br>        ListNode <span class="hljs-number">*c</span><span class="hljs-attribute">ur</span>=head;<br>        short <span class="hljs-attribute">hl</span>=0;//链表长度<br>        <span class="hljs-keyword">while</span>(cur)<br>        &#123;<br>            ++hl;<br>            <span class="hljs-attribute">cur</span>=cur-&gt;next;<br>        &#125;<br>        <span class="hljs-attribute">cur</span>=head;<br>        int <span class="hljs-attribute">num</span>=0;<br>        <span class="hljs-keyword">while</span>(num&lt;hl/2)<br>        &#123;<br>            ++num;<br>            <span class="hljs-attribute">cur</span>=cur-&gt;next;<br>        &#125;<br>        return cur;;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs dart"><span class="hljs-comment">//一般在Qt的构造函数进行初始化操作（窗口，数据。。）</span><br><span class="hljs-comment">//显示当前窗口的时候，显示另一个窗口 TestWidget</span><br><span class="hljs-comment">//创建窗口对象</span><br><span class="hljs-comment">//没有给w指定父对象，这个窗口是一个独立窗口</span><br>TestWidget* w=<span class="hljs-keyword">new</span> TestWidget;<br>w-&gt;<span class="hljs-keyword">show</span>();<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>QT中所有控件的基类</li>
+</ul>
+<p>基本API使用</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;mainwindow.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;ui_mainwindow.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QRect&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QPoint&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QDebug&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;QMenu&gt;</span></span><br><br>MainWindow::<span class="hljs-built_in">MainWindow</span>(QWidget *parent)<br>    : <span class="hljs-built_in">QMainWindow</span>(parent)<br>    , <span class="hljs-built_in">ui</span>(<span class="hljs-keyword">new</span> Ui::MainWindow)<br>&#123;<br>    ui-&gt;<span class="hljs-built_in">setupUi</span>(<span class="hljs-keyword">this</span>);<br><br>    <span class="hljs-comment">//设置窗口的最大尺寸</span><br>    <span class="hljs-built_in">setMaximumSize</span>(<span class="hljs-number">600</span>,<span class="hljs-number">600</span>);<br>    <span class="hljs-comment">//设置窗口的最小尺寸</span><br>    <span class="hljs-built_in">setMinimumSize</span>(<span class="hljs-number">300</span>,<span class="hljs-number">300</span>);<br>    <span class="hljs-comment">//设置窗口标题</span><br>    <span class="hljs-built_in">setWindowTitle</span>(<span class="hljs-string">&quot;我好想睡觉&quot;</span>);<br>    <span class="hljs-comment">//设置窗口图标</span><br>    <span class="hljs-built_in">setWindowIcon</span>(<span class="hljs-built_in">QIcon</span>(<span class="hljs-string">&quot;c:\\Users\\御龙\\Desktop\\hhh.jpg&quot;</span>));<br><br>    <span class="hljs-built_in">connect</span>(<span class="hljs-keyword">this</span>,&amp;MainWindow::windowTitleChanged,<span class="hljs-keyword">this</span>,[=]()<br>    &#123;<br>        <span class="hljs-built_in">qDebug</span>()&lt;&lt;<span class="hljs-string">&quot;标题修改&quot;</span>;<br>    &#125;);<br><br>    <span class="hljs-comment">//添加菜单</span><br>    <span class="hljs-built_in">setContextMenuPolicy</span>(Qt::CustomContextMenu);<br>    <span class="hljs-built_in">connect</span>(<span class="hljs-keyword">this</span>,&amp;MainWindow::customContextMenuRequested,<span class="hljs-keyword">this</span>,[=](<span class="hljs-type">const</span> QPoint &amp;pos)<br>    &#123;<br>        QMenu menu;<br>        menu.<span class="hljs-built_in">addAction</span>(<span class="hljs-string">&quot;工具&quot;</span>);<br>        menu.<span class="hljs-built_in">addAction</span>(<span class="hljs-string">&quot;文件&quot;</span>);<br>        menu.<span class="hljs-built_in">addAction</span>(<span class="hljs-string">&quot;调试&quot;</span>);<br>        <span class="hljs-comment">//全局坐标</span><br>        menu.<span class="hljs-built_in">exec</span>(QCursor::<span class="hljs-built_in">pos</span>());<br>    &#125;);<br>&#125;<br><br>MainWindow::~<span class="hljs-built_in">MainWindow</span>()<br>&#123;<br>    <span class="hljs-keyword">delete</span> ui;<br>&#125;<br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">MainWindow::on_moveBtu_clicked</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//获取窗口信息</span><br>    QRect rect=<span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">frameGeometry</span>();<br>    <span class="hljs-comment">//将窗口向右平移10，向下平移20</span><br>    <span class="hljs-built_in">move</span>(rect.<span class="hljs-built_in">topLeft</span>()+<span class="hljs-built_in">QPoint</span>(<span class="hljs-number">10</span>,<span class="hljs-number">20</span>));<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">MainWindow::on_pionatinBtu_clicked</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    QRect rect=<span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">frameGeometry</span>();<br>    <span class="hljs-built_in">qDebug</span>()&lt;&lt;<span class="hljs-string">&quot;左上角：&quot;</span>&lt;&lt;rect.<span class="hljs-built_in">topLeft</span>()<br>            &lt;&lt;<span class="hljs-string">&quot;右下角：&quot;</span>&lt;&lt;rect.<span class="hljs-built_in">topRight</span>()<br>            &lt;&lt;<span class="hljs-string">&quot;宽度：&quot;</span>&lt;&lt;rect.<span class="hljs-built_in">width</span>()<br>            &lt;&lt;<span class="hljs-string">&quot;高度：&quot;</span>&lt;&lt;rect.<span class="hljs-built_in">height</span>();<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">MainWindow::on_modifyBut_clicked</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">setWindowTitle</span>(<span class="hljs-string">&quot;hello,QT&quot;</span>);<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="QDialog"><a href="#QDialog" class="headerlink" title="QDialog"></a>QDialog</h2><p>特点：</p>
+<ul>
+<li><p>对话窗口类</p>
+</li>
+<li><p>模态和非模态两种显示方式</p>
+<ul>
+<li><p>模态窗口是一种阻塞用户交互的窗口，意味着在模态窗口打开期间，用户无法与应用程序的其他部分进行交互。用户必须在模态窗口上执行某种操作（例如点击按钮或输入信息）后，才能返回到应用程序的其他部分。</p>
+</li>
+<li><p>非模态窗口与模态窗口相反，它不会阻塞用户与应用程序的其他部分的交互。用户可以在非模态窗口打开的同时继续与应用程序的其他部分进行交互。</p>
+</li>
+</ul>
+</li>
+<li><p>不能内嵌</p>
+</li>
+</ul>
+<h2 id="QMainWindow"><a href="#QMainWindow" class="headerlink" title="QMainWindow"></a>QMainWindow</h2><p>特点:</p>
+<ul>
+<li><p>不能内嵌</p>
+</li>
+<li><p>可以包含菜单栏，工具栏，状态栏</p>
+</li>
+</ul>
+
                 
               </div>
             
@@ -311,7 +333,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  <a href="/categories/QT/" class="category-chain-item">QT</a>
   
   
 
@@ -326,7 +348,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%93%BE%E8%A1%A8/" class="print-no-link">#链表</a>
+        <a href="/tags/Qt/" class="print-no-link">#Qt</a>
       
     </div>
   
@@ -338,8 +360,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>链表</div>
-      <div>http://example.com/2024/01/21/链表/</div>
+      <div>QT基本窗口类</div>
+      <div>http://example.com/2024/03/16/QT基本窗口类/</div>
     </div>
     <div class="license-meta">
       
@@ -351,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月21日</div>
+          <div>2024年3月16日</div>
         </div>
       
       
@@ -383,9 +405,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/28/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">
+                      <a href="/2024/03/16/QT%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" title="QT中的内存回收机制">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二叉树</span>
+                        <span class="hidden-mobile">QT中的内存回收机制</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -393,8 +415,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/18/%E9%A1%BA%E5%BA%8F%E8%A1%A8/" title="顺序表">
-                        <span class="hidden-mobile">顺序表</span>
+                      <a href="/2024/03/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">
+                        <span class="hidden-mobile">设计模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

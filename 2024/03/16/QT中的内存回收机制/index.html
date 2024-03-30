@@ -16,19 +16,22 @@
   <meta name="author" content="�Һ���˯��">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="栈">
-<meta property="og:url" content="http://example.com/2024/01/28/%E6%A0%88/index.html">
+    <meta name="description" content="QT中的内存回收机制在Qt中创建对象的时候会提供一个 Parent对象指针（可以查看类的构造函数），下面来解释这个parent到底是干什么的。 QObject是以对象树的形式组织起来的。当你创建一个QObject对象时，会看到QObject的构造函数接收一个QObject指针作为参数，这个参数就是 parent，也就是父对象指针。这相当于，在创建QObject对象时，可以提供一个其父对象，我们创建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT中的内存回收机制">
+<meta property="og:url" content="http://example.com/2024/03/16/QT%E4%B8%AD%E7%9A%84%E5%86%85%E5%AD%98%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="QT中的内存回收机制在Qt中创建对象的时候会提供一个 Parent对象指针（可以查看类的构造函数），下面来解释这个parent到底是干什么的。 QObject是以对象树的形式组织起来的。当你创建一个QObject对象时，会看到QObject的构造函数接收一个QObject指针作为参数，这个参数就是 parent，也就是父对象指针。这相当于，在创建QObject对象时，可以提供一个其父对象，我们创建">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-28T06:32:41.000Z">
-<meta property="article:modified_time" content="2024-01-28T06:32:41.615Z">
+<meta property="article:published_time" content="2024-03-16T06:54:38.000Z">
+<meta property="article:modified_time" content="2024-03-16T07:11:13.854Z">
 <meta property="article:author" content="�Һ���˯��">
+<meta property="article:tag" content="QT">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>栈 - Hexo</title>
+  <title>QT中的内存回收机制 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -194,7 +197,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="栈"></span>
+            <span id="subtitle" data-typed-text="QT中的内存回收机制"></span>
           
         </div>
 
@@ -205,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-28 14:32" pubdate>
-          2024年1月28日 下午
+        <time datetime="2024-03-16 14:54" pubdate>
+          2024年3月16日 下午
         </time>
       </span>
     
@@ -217,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          812 字
         
       </span>
     
@@ -228,7 +231,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -265,12 +268,29 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">栈</h1>
+            <h1 id="seo-header">QT中的内存回收机制</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h2 id="QT中的内存回收机制"><a href="#QT中的内存回收机制" class="headerlink" title="QT中的内存回收机制"></a>QT中的内存回收机制</h2><p>在Qt中创建对象的时候会提供一个 Parent对象指针（可以查看类的构造函数），下面来解释这个parent到底是干什么的。</p>
+<p>QObject是以对象树的形式组织起来的。当你创建一个QObject对象时，会看到QObject的构造函数接收一个QObject指针作为参数，这个参数就是 parent，也就是父对象指针。这相当于，在创建QObject对象时，可以提供一个其父对象，我们创建的这个QObject对象会自动添加到其父对象的children()列表。当父对象析构的时候，这个列表中的所有对象也会被析构。（注意，这里的父对象并不是继承意义上的父类！）</p>
+<p>QWidget是能够在屏幕上显示的一切组件的父类。QWidget继承自QObject，因此也继承了这种对象树关系。一个孩子自动地成为父组件的一个子组件。因此，它会显示在父组件的坐标系统中，被父组件的边界剪裁。例如，当用户关闭一个对话框的时候，应用程序将其删除，那么，我们希望属于这个对话框的按钮、图标等应该一起被删除。事实就是如此，因为这些都是对话框的子组件。</p>
+<p>Qt 引入对象树的概念，在一定程度上解决了内存问题。</p>
+<ul>
+<li><p>当一个QObject对象在堆上创建的时候，Qt 会同时为其创建一个对象树。不过，对象树中对象的顺序是没有定义的。这意味着，销毁这些对象的顺序也是未定义的。</p>
+</li>
+<li><p>任何对象树中的 QObject对象 delete 的时候，如果这个对象有 parent，则自动将其从 parent 的children()列表中删除；如果有孩子，则自动 delete 每一个孩子。Qt 保证没有QObject会被 delete 两次，这是由析构顺序决定的。</p>
+</li>
+</ul>
+<p>综上所述，Qt中有内存回收机制, 但是不是所有被new出的对象被自动回收, 满足条件才可以回收, 如果想要在Qt中实现内存的自动回收, 需要满足以下两个条件:</p>
+<ul>
+<li><p>创建的对象必须是QObject类的子类(间接子类也可以)。</p>
+</li>
+<li><p>创建出的类对象, 必须要指定其父对象是谁。</p>
+</li>
+</ul>
+
                 
               </div>
             
@@ -278,6 +298,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/QT/" class="category-chain-item">QT</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/QT/" class="print-no-link">#QT</a>
+      
+    </div>
   
 </div>
 
@@ -287,8 +335,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>栈</div>
-      <div>http://example.com/2024/01/28/栈/</div>
+      <div>QT中的内存回收机制</div>
+      <div>http://example.com/2024/03/16/QT中的内存回收机制/</div>
     </div>
     <div class="license-meta">
       
@@ -300,7 +348,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月28日</div>
+          <div>2024年3月16日</div>
         </div>
       
       
@@ -332,9 +380,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/28/%E4%BA%8C%E5%8F%89%E6%A0%91/" title="二叉树">
+                      <a href="/2024/03/17/QT%E4%B8%AD%E7%9A%84%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="QT中的基础数据类型">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二叉树</span>
+                        <span class="hidden-mobile">QT中的基础数据类型</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -342,8 +390,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/21/%E9%93%BE%E8%A1%A8/" title="链表">
-                        <span class="hidden-mobile">链表</span>
+                      <a href="/2024/03/16/QT%E5%9F%BA%E6%9C%AC%E7%AA%97%E5%8F%A3%E7%B1%BB/" title="QT基本窗口类">
+                        <span class="hidden-mobile">QT基本窗口类</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
