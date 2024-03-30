@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="�Һ���˯��">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介基于前面介绍的QT知识，做一个电子相册，总结前文介绍的各类知识，将用QListWidget，QTreeWidget，信号槽，绘图事件，鼠标事件,qss等知识，算是对之前知识的一个总结。 MianWindow设计 在MainWindow.ui界面中的centralWidget中添加水平布局horizontalLayout，在该布局添加两个垂直布局picLayout和proLayout,设置比例为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT电子相册项目（一）——目录树和向导">
+<meta property="og:url" content="http://example.com/2024/03/30/QT%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%80%EF%BC%89%E2%80%94%E2%80%94%E7%9B%AE%E5%BD%95%E6%A0%91%E5%92%8C%E5%90%91%E5%AF%BC/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介基于前面介绍的QT知识，做一个电子相册，总结前文介绍的各类知识，将用QListWidget，QTreeWidget，信号槽，绘图事件，鼠标事件,qss等知识，算是对之前知识的一个总结。 MianWindow设计 在MainWindow.ui界面中的centralWidget中添加水平布局horizontalLayout，在该布局添加两个垂直布局picLayout和proLayout,设置比例为">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image-11.png">
+<meta property="og:image" content="http://example.com/image-12.png">
+<meta property="og:image" content="http://example.com/image-13.png">
+<meta property="og:image" content="http://example.com/image-14.png">
+<meta property="og:image" content="http://example.com/image-15.png">
+<meta property="og:image" content="http://example.com/image-16.png">
+<meta property="article:published_time" content="2024-03-30T06:41:37.000Z">
+<meta property="article:modified_time" content="2024-03-30T09:59:23.788Z">
+<meta property="article:author" content="�Һ���˯��">
+<meta property="article:tag" content="QT">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/image-11.png">
+  
+  
+  
+  <title>QT电子相册项目（一）——目录树和向导 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>我好想睡觉</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="QT电子相册项目（一）——目录树和向导"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-30 14:41" pubdate>
+          2024年3月30日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          16k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          137 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">QT电子相册项目（一）——目录树和向导</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>基于前面介绍的QT知识，做一个电子相册，总结前文介绍的各类知识，将用QListWidget，<br>QTreeWidget，信号槽，绘图事件，鼠标事件,qss等知识，算是对之前知识的一个总结。</p>
+<h1 id="MianWindow设计"><a href="#MianWindow设计" class="headerlink" title="MianWindow设计"></a>MianWindow设计</h1><ol>
+<li>在MainWindow.ui界面中的centralWidget中添加水平布局horizontalLayout，在该布<br>局添加两个垂直布局picLayout和proLayout,设置比例为1:4。</li>
+</ol>
+<ul>
+<li><p>picLayout: 用于之后显示图片；</p>
+</li>
+<li><p>proLayout: 用于显示目录树。</p>
+</li>
+</ul>
+<p>效果如下图所示：</p>
+<p><img src="/image-11.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<ol start="2">
+<li>在MainWindow的构造函数中添加菜单项，并为菜单项设置信号连接</li>
+</ol>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs zephir"> ui-&gt;setupUi(this);<br> this-&gt;setMinimumSize(<span class="hljs-number">1629</span>,<span class="hljs-number">869</span>);<br><span class="hljs-comment">//创建菜单栏</span><br> QMenu * menu_file = menuBar()-&gt;addMenu(tr(<span class="hljs-string">&quot;文件(&amp;F)&quot;</span>));<br> <span class="hljs-comment">//创建项目动作</span><br> QAction * act_create_pro = <span class="hljs-keyword">new</span> QAction(QIcon(<span class="hljs-string">&quot;:/icon/createpro.png&quot;</span>), tr(<span class="hljs-string">&quot;创建项目&quot;</span>),this);<br> act_create_pro-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_N));<br> menu_file-&gt;addAction(act_create_pro);<br><br> <span class="hljs-comment">//打开项目动作</span><br> QAction * act_open_pro = <span class="hljs-keyword">new</span> QAction(QIcon(<span class="hljs-string">&quot;:/icon/openpro.png&quot;</span>), tr(<span class="hljs-string">&quot;打开项目&quot;</span>),this);<br> act_open_pro-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));<br> menu_file-&gt;addAction(act_open_pro);<br><br> <span class="hljs-comment">//创建设置菜单</span><br> QMenu * menu_set = menuBar()-&gt;addMenu(tr(<span class="hljs-string">&quot;设置(&amp;S)&quot;</span>));<br> <span class="hljs-comment">//设置背景音乐动作</span><br> QAction * act_music = <span class="hljs-keyword">new</span> QAction(QIcon(<span class="hljs-string">&quot;:/icon/music.png&quot;</span>), tr(<span class="hljs-string">&quot;背景音乐&quot;</span>),this);<br> act_music-&gt;setShortcut(QKeySequence(Qt::CTRL + Qt::Key_M));<br> menu_set-&gt;addAction(act_music);<br><br> _protree = <span class="hljs-keyword">new</span> ProTree();<br> ui-&gt;proLayout-&gt;addWidget(_protree,<span class="hljs-number">0</span>);<br><br> _picshow = <span class="hljs-keyword">new</span> PicShow();<br> ui-&gt;picLayout-&gt;addWidget(_picshow);<br><br> <span class="hljs-comment">//连接创建项目槽函数</span><br> connect(act_create_pro, &amp;QAction::triggered, this, &amp;MainWindow::SlotCreatePro);<br> <br> <span class="hljs-comment">//连接打开项目的槽函数</span><br>  connect(act_open_pro, &amp;QAction::triggered, this, &amp;MainWindow::SlotOpenPro);<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在mian函数中设置MainWindow最大显示</li>
+</ol>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs abnf">w.setWindowTitle(<span class="hljs-string">&quot;Album&quot;</span>)<span class="hljs-comment">;</span><br>w.showMaximized()<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>为MainWindow菜单栏设置qss</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-comment">/*mainwindow 样式*/</span><br>MainWindow &#123;<br>    <span class="hljs-comment">/* 背景色 */</span><br>    <span class="hljs-attribute">background-color</span>:<span class="hljs-built_in">rgb</span>(<span class="hljs-number">46</span>,<span class="hljs-number">47</span>,<span class="hljs-number">48</span>);<br>&#125;<br><br><span class="hljs-comment">/*菜单栏基本样式*/</span><br>QMenuBar&#123;<br>    <span class="hljs-attribute">color</span>:<span class="hljs-built_in">rgb</span>(<span class="hljs-number">231</span>,<span class="hljs-number">231</span>,<span class="hljs-number">231</span>);<br>    <span class="hljs-attribute">background-color</span>:<span class="hljs-built_in">rgb</span>(<span class="hljs-number">46</span>,<span class="hljs-number">47</span>,<span class="hljs-number">48</span>);<br>&#125;<br><br><span class="hljs-comment">/*菜单基本样式*/</span><br>QMenu&#123;<br>    <span class="hljs-attribute">color</span>:<span class="hljs-built_in">rgb</span>(<span class="hljs-number">231</span>,<span class="hljs-number">231</span>,<span class="hljs-number">231</span>);<br>    <span class="hljs-attribute">background-color</span>:<span class="hljs-built_in">rgb</span>(<span class="hljs-number">55</span>,<span class="hljs-number">55</span>,<span class="hljs-number">55</span>);<br>&#125;<br><br><br><span class="hljs-comment">/* 菜单栏选中条目时 */</span><br><br>QMenuBar::item:selected &#123;<br>        <span class="hljs-attribute">background-color</span>:<span class="hljs-built_in">rgb</span>(<span class="hljs-number">80</span>,<span class="hljs-number">80</span>,<span class="hljs-number">80</span>);<br>&#125;<br><br><span class="hljs-comment">/*菜单选中条目*/</span><br>QMenu::item:selected &#123;<br>    <span class="hljs-attribute">background-color</span>:<span class="hljs-built_in">rgb</span>(<span class="hljs-number">39</span>,<span class="hljs-number">96</span>,<span class="hljs-number">154</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="向导类Wizard"><a href="#向导类Wizard" class="headerlink" title="向导类Wizard"></a>向导类Wizard</h1><ol>
+<li><p>添加Qt设计师界面类Wizard，用于响应点击创建项目后弹出向导框。</p>
+</li>
+<li><p>添加两个向导页面类ConfirmPage和ProSetPage类，基类选择QWizardPage类，并在<br>Wizard.ui里添加两个wizardpage，将这两个wizardpage升级为ProSetPage和<br>ConfirmPage。ProSetPage类用来设置创建项目的属性，我们先点击其ui文件为其添加网格布局gridLayout,然后将ProSetPage设置为网格布局，设置gridLayout的margin为5，在gridLayout中添加控件，形成如下布局：</p>
+</li>
+</ol>
+<p><img src="/image-12.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<ol start="3">
+<li>将两个lineEdit注册为wizard的field，保证两个lineEdit是空的时候无法点击下一步，将QLineEdit的textEdited信号和ProSetPage的completeChanged信号连接起来，这样在lineEdit编辑的时候就会发送textEdited信号，进而触发ProSetPage发送<br>completeChanged信号。<br>setClearButtonEnabled设置为true可以在lineEdit输入数据后显示清除按钮，直接清除已录入的字符。 completeChanged信号是从proSetPage的基类QWizardPage类继承而来的。completeChanged信号发出后会触发QWizardPage类的isComplete函数。</li>
+</ol>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs xl">ProSetPage::ProSetPage(QWidget *parent) :<br>    QWizardPage(parent),<br>    ui(new Ui::ProSetPage)<br>&#123;<br>    <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span>setupUi(this);<br>    <span class="hljs-function"><span class="hljs-title">registerField</span>(&quot;proPath&quot;, ui-&gt;</span>lineEdit_2);<br>    <span class="hljs-function"><span class="hljs-title">registerField</span>(&quot;proName*&quot;, ui-&gt;</span>lineEdit);<br><br>    <span class="hljs-function"><span class="hljs-title">connect</span>(ui-&gt;</span>lineEdit, &amp;QLineEdit::textEdited, this, &amp;ProSetPage::completeChanged);<br>    <span class="hljs-function"><span class="hljs-title">connect</span>(ui-&gt;</span>lineEdit_2, &amp;QLineEdit::textEdited, this, &amp;ProSetPage::completeChanged);<br>    <br>    <span class="hljs-comment">//获取当前路径</span><br>    QString curPath = QDir::currentPath();<br>    <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit_2</span>-&gt;</span>setText(curPath);<br>    <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit_2</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">setCursorPosition</span>( ui-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit_2</span>-&gt;</span><span class="hljs-keyword">text</span>().size());<br>    <span class="hljs-comment">//设置一件清除文本框按钮</span><br>    <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit</span>-&gt;</span>setClearButtonEnabled(<span class="hljs-literal">true</span>);<br>    <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit_2</span>-&gt;</span>setClearButtonEnabled(<span class="hljs-literal">true</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>为了实现判断当前文件夹是否合理以及是否以经右项目路径了，这里我们重写isComplet函数</li>
+</ol>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs xl">bool ProSetPage::isComplete() const<br>&#123;<br>    <span class="hljs-comment">//当文件名和路径有一个为空时则返回false</span><br>    <span class="hljs-function"><span class="hljs-title">if</span>(ui-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">text</span>() == &quot;&quot; || ui-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit_2</span>-&gt;</span><span class="hljs-keyword">text</span>() == <span class="hljs-string">&quot;&quot;</span>)&#123;<br>        return <span class="hljs-literal">false</span>;<br>    &#125;<br><br>    <span class="hljs-comment">//判断是否文件夹是否合理</span><br>    QD<span class="hljs-function"><span class="hljs-title">ir</span> dir(ui-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit_2</span>-&gt;</span><span class="hljs-keyword">text</span>());<br>    <span class="hljs-keyword">if</span>(!dir.exists())<br>    &#123;<br>       <span class="hljs-comment">//qDebug()&lt;&lt;&quot;file path is not exists&quot; &lt;&lt; endl;</span><br>       <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">tips</span>-&gt;</span>setText(<span class="hljs-string">&quot;project path is not exists&quot;</span>);<br>       return <span class="hljs-literal">false</span>;<br>    &#125;<br><br>    <span class="hljs-comment">//判断路径是否存在</span><br>    QS<span class="hljs-function"><span class="hljs-title">tring</span> absFilePath = dir.absoluteFilePath(ui-&gt;</span><span class="hljs-function"><span class="hljs-title">lineEdit</span>-&gt;</span><span class="hljs-keyword">text</span>());<br>    <span class="hljs-comment">//qDebug() &lt;&lt; &quot;absFilePath is &quot; &lt;&lt; absFilePath;</span><br><br>    QDir dist_dir(absFilePath);<br>    <span class="hljs-keyword">if</span>(dist_dir.exists())&#123;<br>        <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">tips</span>-&gt;</span>setText(<span class="hljs-string">&quot;project has exists, change path or name!&quot;</span>);<br>        return <span class="hljs-literal">false</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">tips</span>-&gt;</span>setText(<span class="hljs-string">&quot;&quot;</span>);<br>    <span class="hljs-comment">//使用父类作用域运算符显示调用该函数，从而保留了基类的原始行为。</span><br>    return QWizardPage::isComplete();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>为浏览按钮添加点击后选择文件夹操作，在prosetpage.ui文件里右键点击browse按钮，选择转到槽，QT会为我们生成槽函数</li>
+</ol>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs rust"><span class="hljs-comment">//添加浏览按钮点击后选择文件夹的操作</span><br>void ProSetPage::<span class="hljs-title function_ invoke__">on_pushButton_clicked</span>()<br>&#123;<br>    <span class="hljs-comment">//创建一个文件对话框</span><br>    QFileDialog file_dialog;<br>    <span class="hljs-comment">//以目录模式打开</span><br>    file_dialog.<span class="hljs-title function_ invoke__">setFileMode</span>(QFileDialog::Directory);<br>    <span class="hljs-comment">//设置标题</span><br>    file_dialog.<span class="hljs-title function_ invoke__">setWindowTitle</span>(<span class="hljs-string">&quot;选择导入的文件夹&quot;</span>);<br>    auto path = QDir::<span class="hljs-title function_ invoke__">currentPath</span>();<br>    file_dialog.<span class="hljs-title function_ invoke__">setDirectory</span>(path);<br>    file_dialog.<span class="hljs-title function_ invoke__">setViewMode</span>(QFileDialog::Detail);<br><br>    QStringList fileNames;<br>    <span class="hljs-keyword">if</span> (file_dialog.<span class="hljs-title function_ invoke__">exec</span>())&#123;<br>        fileNames = file_dialog.<span class="hljs-title function_ invoke__">selectedFiles</span>();<br>    &#125;<br><br>    <span class="hljs-keyword">if</span>(fileNames.<span class="hljs-title function_ invoke__">length</span>() &lt;= <span class="hljs-number">0</span>)&#123;<br>         <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    QString import_path = fileNames.<span class="hljs-title function_ invoke__">at</span>(<span class="hljs-number">0</span>);<br>    <span class="hljs-title function_ invoke__">qDebug</span>() &lt;&lt; <span class="hljs-string">&quot;import_path is &quot;</span> &lt;&lt; import_path &lt;&lt; endl;<br>    <span class="hljs-comment">//将选择的路径显示在对话框中</span><br>    ui<span class="hljs-punctuation">-&gt;</span>lineEdit_2<span class="hljs-punctuation">-&gt;</span><span class="hljs-title function_ invoke__">setText</span>(import_path);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h1 id="项目目录树ProPree类"><a href="#项目目录树ProPree类" class="headerlink" title="项目目录树ProPree类"></a>项目目录树ProPree类</h1><ol>
+<li>创建QT设计师界面类，命名为ProPree,ProTree中添加一个垂直布局，布局内添加一个QLabel和一个QTreeWidget，最后将ProTree设置为垂直布局。</li>
+</ol>
+<ul>
+<li>QTreeWidget: 用于显示目录树</li>
+</ul>
+<p><img src="/image-13.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<ol start="2">
+<li><p>考虑到QTreeWidget功能有限，我们需要继承QTreeWidget重新实现一个新的类ProTreeWidget，所以在项目中新增C++类ProTreeWidget继承自QTreeWidget。同时将ProTree布局中的QTreeWidget提升为ProTreeWidget。</p>
+</li>
+<li><p>同样的道理为了便于操作定义ProTreeItem继承QTreeWidgetItem，相关的成员变量和函数省略，这里简单介绍下构造函数</p>
+</li>
+</ol>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sqf"><br>ProTreeItem::ProTreeItem(QTreeWidget *view, const QString &amp;<span class="hljs-built_in">name</span>,<br>                         const QString &amp;path, int <span class="hljs-built_in">type</span>):QTreeWidgetItem (view, <span class="hljs-built_in">type</span>),<br>    <span class="hljs-variable">_path</span>(path),<span class="hljs-variable">_name</span>(<span class="hljs-built_in">name</span>),<span class="hljs-variable">_root</span>(this),<span class="hljs-variable">_pre_item</span>(nullptr),<span class="hljs-variable">_next_item</span>(nullptr)<br>&#123;<br><br>&#125;<br><br>ProTreeItem::ProTreeItem(QTreeWidgetItem *parent, const QString &amp;<span class="hljs-built_in">name</span>,<br>                         const QString &amp;path, QTreeWidgetItem* root,int <span class="hljs-built_in">type</span>):QTreeWidgetItem(parent,<span class="hljs-built_in">type</span>),<br>    <span class="hljs-variable">_path</span>(path),<span class="hljs-variable">_name</span>(<span class="hljs-built_in">name</span>),<span class="hljs-variable">_root</span>(root),<span class="hljs-variable">_pre_item</span>(nullptr),<span class="hljs-variable">_next_item</span>(nullptr)<br><br>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在ProTreeWidgett添加槽函数AddProToTree,在AddProToTree函数里判断路径和名字是否准确，然后创建一个item插入到treewidget里。</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-type">void</span> ProTreeWidget::AddProToTree(const QString &amp;<span class="hljs-type">name</span>, const QString &amp;<span class="hljs-type">path</span>)<br>&#123;<br>    //qDebug() &lt;&lt; &quot;ProTreeWidget::AddProToTree name is &quot; &lt;&lt; <span class="hljs-type">name</span> &lt;&lt; &quot; path is &quot; &lt;&lt; <span class="hljs-type">path</span> &lt;&lt; endl;<br>    //创建一个文件夹<br>    QDir dir(<span class="hljs-type">path</span>);<br>    QString file_path = dir.absoluteFilePath(<span class="hljs-type">name</span>);<br>    //检测重名，判断路径和名字都一样则拒绝加入<br>    <span class="hljs-keyword">if</span>(_set_path.find(file_path) != _set_path.<span class="hljs-keyword">end</span>())&#123;<br>        qDebug() &lt;&lt; &quot;file has loaded&quot; &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    //构造项目用的文件夹<br>    QDir pro_dir(file_path);<br>    //如果文件夹不存在则创建<br>    <span class="hljs-keyword">if</span>(!pro_dir.<span class="hljs-keyword">exists</span>())&#123;<br>        <span class="hljs-type">bool</span> <span class="hljs-keyword">enable</span> = pro_dir.mkpath(file_path);<br>        <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">enable</span>)&#123;<br>            qDebug() &lt;&lt; &quot;pro_dir make path failed&quot; &lt;&lt; endl;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>    &#125;<br><br>    _set_path.<span class="hljs-keyword">insert</span>(file_path);<br>    //创建一个项目条目<br>    auto * item = <span class="hljs-built_in">new</span> ProTreeItem(this, <span class="hljs-type">name</span>, file_path, TreeItemPro);<br>    //设置项目的名字，图片，路径<br>    item-&gt;setData(<span class="hljs-number">0</span>,Qt::DisplayRole, <span class="hljs-type">name</span>);<br>    item-&gt;setData(<span class="hljs-number">0</span>,Qt::DecorationRole, QIcon(&quot;:/icon/dir.png&quot;));<br>    item-&gt;setData(<span class="hljs-number">0</span>,Qt::ToolTipRole, file_path);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>在MainWindow中实现创建项目的槽函数</li>
+</ol>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs dts">void MainWindow::SlotCreatePro(bool)<span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-comment">//qDebug() &lt;&lt; &quot;slot create pro triggered&quot; &lt;&lt; endl;</span><br>    <span class="hljs-comment">//创建向导类</span><br>    Wizard wizard(this)<span class="hljs-punctuation">;</span><br>    wizard.setWindowTitle(tr(<span class="hljs-string">&quot;创建项目&quot;</span>))<span class="hljs-punctuation">;</span><br>    auto *<span class="hljs-attr">page</span> <span class="hljs-operator">=</span> wizard.page(<span class="hljs-number">0</span>)<span class="hljs-punctuation">;</span><br>    page-&gt;setTitle(tr(<span class="hljs-string">&quot;设置项目配置&quot;</span>))<span class="hljs-punctuation">;</span><br>    <span class="hljs-comment">//连接信号和槽</span><br>    connect(<span class="hljs-variable">&amp;wizard</span>, <span class="hljs-variable">&amp;</span>Wizard::SigProSettings, dynamic_cast<span class="hljs-params">&lt;ProTree*&gt;</span>(_protree),<span class="hljs-variable">&amp;</span>ProTree::AddProToTree)<span class="hljs-punctuation">;</span><br><br>    <span class="hljs-comment">//显示</span><br>    wizard.show()<span class="hljs-punctuation">;</span><br>    wizard.exec()<span class="hljs-punctuation">;</span><br>    disconnect(<span class="hljs-variable">&amp;wizard</span>)<span class="hljs-punctuation">;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>在ProTree实现AddProToTree槽函数</li>
+</ol>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xl">void ProTree::AddProToTree(const QString &amp;<span class="hljs-keyword">name</span>, const QString &amp;<span class="hljs-built_in">path</span>)<br>&#123;<br>    <span class="hljs-comment">//通过ui调用ProTreeWiget中的AddProToTree函数，实现项目的在目录树中的增加</span><br>    <span class="hljs-function"><span class="hljs-title">ui</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">treeWidget</span>-&gt;</span>AddProToTree(<span class="hljs-keyword">name</span>, <span class="hljs-built_in">path</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>在qss中设置ProTree样式</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs css">ProTree &#123;<br>    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#9F9F9F</span>;<br>    <span class="hljs-attribute">border-style</span>: solid;<br>    <span class="hljs-attribute">border-width</span>: <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">1px</span> <span class="hljs-number">1px</span>;<br>    <span class="hljs-attribute">padding-right</span>: <span class="hljs-number">10px</span>;<br>&#125;<br><br>QLabel<span class="hljs-selector-id">#label_pro</span> &#123;<br>    <span class="hljs-attribute">color</span>: <span class="hljs-built_in">rgb</span>(<span class="hljs-number">231</span>,<span class="hljs-number">231</span>,<span class="hljs-number">231</span>);<br>    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#9F9F9F</span>;<br>    <span class="hljs-attribute">border-style</span>: dotted;<br>    <span class="hljs-attribute">border-width</span>: <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1px</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">10px</span>;<br>    <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">5px</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>这样在wizard点击完成时触发done函数，进而发送信号触发ProTree的AddProToTree函数了，从而生成一个项目目录的item。 效果如下</p>
+<p><img src="/image-14.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<h1 id="文件夹导入功能"><a href="#文件夹导入功能" class="headerlink" title="文件夹导入功能"></a>文件夹导入功能</h1><p>在生成的ProTreeWidget的项目root item中点击右键，弹出菜单，然后选择导入文件夹，将文件夹中的目录和文件递归的导入我们创建的项目目录，并且在root下生成item节点。</p>
+<ol>
+<li>ProTreeWidget构造函数添加信号和槽函数连接,并且创建导入文件的动作，并为该动作连接槽函数。</li>
+</ol>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lisp">connect(<span class="hljs-name">this</span>, <span class="hljs-symbol">&amp;ProTreeWidget</span>:<span class="hljs-symbol">:itemPressed</span>, this, <span class="hljs-symbol">&amp;ProTreeWidget</span>:<span class="hljs-symbol">:SlotItemPressed</span>)<span class="hljs-comment">;</span><br>_action_import = new QAction(<span class="hljs-name">QIcon</span>(<span class="hljs-string">&quot;:/icon/import.png&quot;</span>),tr(<span class="hljs-string">&quot;导入文件&quot;</span>), this)<span class="hljs-comment">;</span><br>connect(<span class="hljs-name">_action_import</span>, <span class="hljs-symbol">&amp;QAction</span>:<span class="hljs-symbol">:triggered</span>, this, <span class="hljs-symbol">&amp;ProTreeWidget</span>:<span class="hljs-symbol">:SlotImport</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在ProTreeWidget中实现SlotItemPressed槽函数</li>
+</ol>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs mel">void ProTreeWidget::SlotItemPressed(QTreeWidgetItem *pressedItem, <span class="hljs-keyword">int</span> column)<br>&#123;<br>    <span class="hljs-comment">//qDebug() &lt;&lt; &quot;ProTreeWidget::SlotItemPressed&quot; &lt;&lt; endl;</span><br>    <span class="hljs-keyword">if</span>(QGuiApplication::mouseButtons() == Qt::RightButton)   <span class="hljs-comment">//判断是否为右键</span><br>        &#123;<br>            <span class="hljs-comment">//创建一个目录</span><br>            QMenu <span class="hljs-keyword">menu</span>(this);<br>            qDebug() &lt;&lt; <span class="hljs-string">&quot;menu addr is &quot;</span> &lt;&lt; &amp;<span class="hljs-keyword">menu</span> &lt;&lt; endl;<br>            <span class="hljs-keyword">int</span> itemtype = (<span class="hljs-keyword">int</span>)(pressedItem-&gt;type());<br>            <span class="hljs-keyword">if</span> (itemtype == TreeItemPro)<br>            &#123;<br>                _right_btn_item = pressedItem;<br>                <span class="hljs-comment">//将导入文件动作加入目录中</span><br>                <span class="hljs-keyword">menu</span>.addAction(_action_import);<br><br>                <span class="hljs-keyword">menu</span>.<span class="hljs-keyword">exec</span>(QCursor::pos());   <span class="hljs-comment">//菜单弹出位置为鼠标点击位置</span><br>            &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>当点击导入文件按钮，QAction会发送triggered信号，在ProTreeWidget中定义槽函数SlotImport，用于接收发送的信号。 因为导入操作是一个耗时的操作，所以要放到单独的线程中执行，主线程启动一个进度对话框显示导入进度，同时可以控制导入的中止操作等。 在导入时弹出一个文件选择对话框，设置默认路径</li>
+</ol>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-literal">void</span> ProTreeWidget<span class="hljs-type">::SlotImport</span>()<br>&#123;<br>    QFileDialog file_dialog;<br>    file_dialog.setFileMode(QFileDialog<span class="hljs-type">::Directory</span>);<br>    file_dialog.setWindowTitle(<span class="hljs-string">&quot;选择导入的文件夹&quot;</span>);<br>    QString path = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">if</span>(!_right_btn_item)&#123;<br>        <span class="hljs-comment">//qDebug() &lt;&lt; &quot;_right_btn_item is empty&quot; &lt;&lt; endl;</span><br>        path = QDir<span class="hljs-type">::currentPath</span>();<br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <br>    <span class="hljs-comment">//获取当前路径</span><br>    path = dynamic_cast&lt;ProTreeItem*&gt;(_right_btn_item)-&gt;GetPath();<br>    <br>    file_dialog.setDirectory(path);<br>    file_dialog.setViewMode(QFileDialog<span class="hljs-type">::Detail</span>);<br><br>    QStringList fileNames;<br>      <span class="hljs-keyword">if</span> (file_dialog.exec())&#123;<br>            fileNames = file_dialog.selectedFiles();<br>      &#125;<br><br>      <span class="hljs-keyword">if</span>(fileNames.length() &lt;= <span class="hljs-number">0</span>)&#123;<br>          <span class="hljs-keyword">return</span>;<br>      &#125;<br><br>      QString import_path = fileNames.at(<span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>创建一个ProTreeThread类，继承QThread,用于实现导入文件操作，构造函数为<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><br>OpenTreeThread::<span class="hljs-built_in">OpenTreeThread</span>(const QString &amp;src_path, int &amp;file_count,<br>                               QTreeWidget *self, QObject *parent):<br>    QThread (parent),<span class="hljs-built_in">_bstop</span>(false),<span class="hljs-built_in">_src_path</span>(src_path),<span class="hljs-built_in">_file_count</span>(file_count)<br>    ,<span class="hljs-built_in">_self</span>(self),<span class="hljs-built_in">_root</span>(nullptr)<br>&#123;<br><br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><p>parent传递给父类构造函数;</p>
+</li>
+<li><p>_src_path表示打开的文件夹路径;</p>
+</li>
+<li><p>_dist_path表示我们创建的项目路径;</p>
+</li>
+<li><p>_file_count表示文件数，用来和进度框交互;</p>
+</li>
+<li><p>_parent_item新创建节点的父节;</p>
+</li>
+<li><p>_self表示QProTreeWidget对象;</p>
+</li>
+<li><p>_root表示新创建节点隶属于哪个根节点，便于后期做交互;</p>
+</li>
+<li><p>_bstop表示是否停止，如果为true则线程终止。;</p>
+</li>
+</ul>
+<ol start="5">
+<li>实现copy文件功能和目录树创建</li>
+</ol>
+<p>(1)  根据文件类型(文件夹还是文件)执行不同的逻辑，如果是文件则创建item添加到父节点下。如果是文件夹类型，则递归进入创建逻辑，直到所有的文件和文件夹被遍历完成</p>
+<p>(2) 如果_bstop被设置为true，则退出创建逻辑。</p>
+<p>(3) 统计文件数，发信号SigUpdateProgress通知进度框更新进度</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><code class="hljs zephir"><br>void ProTreeThread::CreateProTree(<span class="hljs-keyword">const</span> QString &amp;src_path, <span class="hljs-keyword">const</span> QString &amp;dist_path,<br>                                  QTreeWidgetItem *parent_item, <span class="hljs-keyword">int</span> &amp;file_count,<br>                                  QTreeWidget *<span class="hljs-keyword">self</span>, QTreeWidgetItem *root, QTreeWidgetItem* preItem)<br>&#123;<br>    <span class="hljs-keyword">if</span>(_bstop)&#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">bool</span> needcopy = <span class="hljs-keyword">true</span>;<br>    <span class="hljs-comment">//如果源路径等于目的路径</span><br>    <span class="hljs-keyword">if</span>(src_path == dist_path)&#123;<br>        needcopy = <span class="hljs-keyword">false</span>;<br>    &#125;<br>    <br>    <span class="hljs-comment">//创建导入的文件夹</span><br>    QDir import_dir(src_path);<br>    <span class="hljs-comment">//qDebug() &lt;&lt; &quot;src_path is &quot; &lt;&lt; src_path &lt;&lt; &quot;dis_path is &quot; &lt;&lt; dist_path &lt;&lt; endl;</span><br>    <span class="hljs-comment">//设置文件过滤器</span><br>    QStringList nameFilters;<br>    import_dir.setFilter(QDir::Dirs|QDir::Files|QDir::NoDotAndDotDot);<span class="hljs-comment">//除了目录或文件，其他的过滤掉</span><br>    import_dir.setSorting(QDir::Name);<span class="hljs-comment">//优先显示名字</span><br>    QFileInfoList list = import_dir.entryInfoList();<br>    <span class="hljs-comment">//qDebug() &lt;&lt; &quot;list.size &quot; &lt;&lt; list.size() &lt;&lt; endl;</span><br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; list.size(); i++)&#123;<br>        <span class="hljs-keyword">if</span>(_bstop)&#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br>        QFileInfo fileInfo = list.at(i);<br>        <span class="hljs-keyword">bool</span> bIsDir = fileInfo.isDir();<br>        <span class="hljs-keyword">if</span> (bIsDir)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(_bstop)&#123;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>            file_count++;<br>            emit SigUpdateProgress(file_count);<br><span class="hljs-comment">//            qDebug()&lt;&lt; &quot;fileInfo.fileName()&quot; &lt;&lt; fileInfo.fileName();</span><br><span class="hljs-comment">//            qDebug()&lt;&lt; &quot;fileInfo.absoluteFilePath() &quot; &lt;&lt; fileInfo.absoluteFilePath();</span><br><span class="hljs-comment">//            qDebug()&lt;&lt; &quot;fileInfo.absolutePath() &quot; &lt;&lt; fileInfo.absolutePath();</span><br><br>            QDir dist_dir(dist_path);<br>            <span class="hljs-comment">//构造子目的路径</span><br>            QString sub_dist_path = dist_dir.absoluteFilePath(fileInfo.fileName());<br>            qDebug()&lt;&lt; <span class="hljs-string">&quot;sub_dist_path &quot;</span> &lt;&lt; sub_dist_path;<br>            <span class="hljs-comment">//子目的目录</span><br>            QDir sub_dist_dir(sub_dist_path);<br>            <span class="hljs-comment">//不能存在则创建</span><br>            <span class="hljs-keyword">if</span>(!sub_dist_dir.exists())&#123;<br>                <span class="hljs-comment">//可以创建多级目录</span><br>                <span class="hljs-keyword">bool</span> ok = sub_dist_dir.mkpath(sub_dist_path);<br>                <span class="hljs-keyword">if</span>(!ok)&#123;<br>                    qDebug()&lt;&lt; <span class="hljs-string">&quot;sub_dist_dir mkpath failed&quot;</span>&lt;&lt; endl;<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br>            &#125;<br><br>            auto * item = <span class="hljs-keyword">new</span> ProTreeItem(parent_item, fileInfo.fileName(),<br>                                          sub_dist_path, root,TreeItemDir);<br>            item-&gt;setData(<span class="hljs-number">0</span>,Qt::DisplayRole, fileInfo.fileName());<br>            item-&gt;setData(<span class="hljs-number">0</span>,Qt::DecorationRole, QIcon(<span class="hljs-string">&quot;:/icon/dir.png&quot;</span>));<br>            item-&gt;setData(<span class="hljs-number">0</span>,Qt::ToolTipRole, sub_dist_path);<br>             ;<br>            CreateProTree(fileInfo.absoluteFilePath(), sub_dist_path, item, file_count, <span class="hljs-keyword">self</span>,root,preItem);<br><br>         &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">if</span>(_bstop)&#123;<br>                <span class="hljs-keyword">return</span>;<br>            &#125;<br>            <span class="hljs-keyword">const</span> QString &amp; suffix = fileInfo.completeSuffix();<br>            <span class="hljs-keyword">if</span>(suffix != <span class="hljs-string">&quot;png&quot;</span> &amp;&amp; suffix != <span class="hljs-string">&quot;jpeg&quot;</span> &amp;&amp; suffix != <span class="hljs-string">&quot;jpg&quot;</span>)&#123;<br>                qDebug() &lt;&lt; <span class="hljs-string">&quot;suffix is not pic &quot;</span> &lt;&lt; suffix &lt;&lt; endl;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            file_count++;<br>            emit SigUpdateProgress(file_count);<br>            <span class="hljs-keyword">if</span>(!needcopy)&#123;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br><br>            QDir dist_dir(dist_path);<br>            QString dist_file_path = dist_dir.absoluteFilePath(fileInfo.fileName());<br>            <span class="hljs-keyword">if</span>(!QFile::copy(fileInfo.absoluteFilePath(), dist_file_path))&#123;<br>                qDebug() &lt;&lt; <span class="hljs-string">&quot;file src to dist  copy failed&quot;</span> &lt;&lt; endl;<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br><br>            auto * item = <span class="hljs-keyword">new</span> ProTreeItem(parent_item, fileInfo.fileName(),<br>                                          dist_file_path, root,TreeItemPic);<br>            item-&gt;setData(<span class="hljs-number">0</span>,Qt::DisplayRole, fileInfo.fileName());<br>            item-&gt;setData(<span class="hljs-number">0</span>,Qt::DecorationRole, QIcon(<span class="hljs-string">&quot;:/icon/pic.png&quot;</span>));<br>            item-&gt;setData(<span class="hljs-number">0</span>,Qt::ToolTipRole, dist_file_path);<br><br>            <span class="hljs-keyword">if</span>(preItem)&#123;<br>                auto* pre_proitem = dynamic_cast&lt;ProTreeItem*&gt;(preItem);<br>                pre_proitem-&gt;SetNextItem(item);<br>            &#125;<br><br>            item-&gt;SetPreItem(preItem);<br>            preItem = item;<br>         &#125;<br>    &#125;<br><br>   <span class="hljs-comment">//  dynamic_cast&lt;ProTreeWidget*&gt;(self)-&gt;SlotFinishProgress();</span><br>    parent_item-&gt;setExpanded(<span class="hljs-keyword">true</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>重写线程run函数 run函数就是线程启动后执行的函数，如果CreateProTree运行结束，判断_bstop是否为true，如果为true说明取消了创建操作，那么就要把根节点移除，并删除文件夹内的文件。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">ProTreeThread::run</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">CreateProTree</span>(_src_path,_dist_path,_parent_item,_file_count,_self,_root);<br>    <span class="hljs-keyword">if</span>(_bstop)&#123;<br>        <span class="hljs-keyword">auto</span> path = <span class="hljs-built_in">dynamic_cast</span>&lt;ProTreeItem*&gt;(_root)-&gt;<span class="hljs-built_in">GetPath</span>();<br>        <span class="hljs-keyword">auto</span> index = _self-&gt;<span class="hljs-built_in">indexOfTopLevelItem</span>(_root);<br>        <span class="hljs-keyword">delete</span> _self-&gt;<span class="hljs-built_in">takeTopLevelItem</span>(index);<br>        <span class="hljs-function">QDir <span class="hljs-title">dir</span><span class="hljs-params">(path)</span></span>;<br>        <span class="hljs-comment">//删除文件夹</span><br>        dir.<span class="hljs-built_in">removeRecursively</span>();<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br><br>    <span class="hljs-function">emit <span class="hljs-title">SigFinishProgress</span><span class="hljs-params">(_file_count)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>完善SlotImport函数</li>
+</ol>
+<p>在ProTreeWidget中创建使用智能指针管理的ProTreeThread数据成员</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//copy文件线程</span><br>std::shared_ptr&lt;ProTreeThread&gt;  _thread_create_pro;<br></code></pre></td></tr></table></figure>
+
+<p>完善SlotImport函数</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-punctuation">&#123;</span><br>     int file_<span class="hljs-attr">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-punctuation">;</span><br><br>     <span class="hljs-comment">//创建模态对话框</span><br>     _dialog_<span class="hljs-attr">progress</span> <span class="hljs-operator">=</span> new QProgressDialog(this)<span class="hljs-punctuation">;</span><br><br>    <span class="hljs-comment">//耗时操作放在线程中操作,使用std::ref将右值转换为左值</span><br><br>     _thread_create_<span class="hljs-attr">pro</span> <span class="hljs-operator">=</span> std::make_shared<span class="hljs-params">&lt;ProTreeThread&gt;</span>(std::ref(import_path), std::ref(path),<br>                                                         _right_btn_item,<br><span class="hljs-symbol">                                                         std:</span>:ref(file_count), this,_right_btn_item,<br>     connect(_thread_create_pro.get(), <span class="hljs-variable">&amp;</span>ProTreeThread::SigUpdateProgress,<br>             this, <span class="hljs-variable">&amp;</span>ProTreeWidget::SlotUpdateProgress)<span class="hljs-punctuation">;</span><br><br>     connect(_thread_create_pro.get(), <span class="hljs-variable">&amp;</span>ProTreeThread::SigFinishProgress, this,<span class="hljs-variable">&amp;</span>ProTreeWidget::SlotFinishProgress)<span class="hljs-punctuation">;</span><br>     nullptr)<span class="hljs-punctuation">;</span><br><br>     connect(_dialog_progress, <span class="hljs-variable">&amp;</span>QProgressDialog::canceled, this, <span class="hljs-variable">&amp;</span>ProTreeWidget::SlotCancelProgress)<span class="hljs-punctuation">;</span><br><br>     connect(this, <span class="hljs-variable">&amp;</span>ProTreeWidget::SigCancelProgress, _thread_create_pro.get(),<span class="hljs-variable">&amp;</span>ProTreeThread::SlotCancelProgress)<span class="hljs-punctuation">;</span><br>     _thread_create_pro-&gt;start()<span class="hljs-punctuation">;</span><br><br>      <br>    _dialog_progress-&gt;setWindowTitle(<span class="hljs-string">&quot;Please wait...&quot;</span>)<span class="hljs-punctuation">;</span><br>    _dialog_progress-&gt;setFixedWidth(PROGRESS_WIDTH)<span class="hljs-punctuation">;</span><br>    _dialog_progress-&gt;setRange(<span class="hljs-number">0</span>, PROGRESS_MAX)<span class="hljs-punctuation">;</span><br>    _dialog_progress-&gt;exec()<span class="hljs-punctuation">;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>相关槽函数的实现：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs sqf">void ProTreeWidget::SlotUpdateProgress(int <span class="hljs-built_in">count</span>)<br>&#123;<br>    <span class="hljs-comment">//qDebug() &lt;&lt; &quot;count is &quot; &lt;&lt; count;</span><br>    <span class="hljs-keyword">if</span>(!<span class="hljs-variable">_dialog_progress</span>)&#123;<br>        qDebug() &lt;&lt; <span class="hljs-string">&quot;dialog_progress is empty!!!&quot;</span> &lt;&lt; <span class="hljs-literal">endl</span>;<br>        return;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">count</span> &gt;= PROGRESS_MAX)&#123;<br>         <span class="hljs-variable">_dialog_progress</span>-&gt;setValue(<span class="hljs-built_in">count</span>%PROGRESS_MAX);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>         <span class="hljs-variable">_dialog_progress</span>-&gt;setValue(<span class="hljs-built_in">count</span>%PROGRESS_MAX);<br>    &#125;<br><br>&#125;<br><br>void ProTreeWidget::SlotCancelProgress()<br>&#123;<br>  <span class="hljs-comment">//  _thread_create_pro-&gt;terminate();</span><br>    emit SigCancelProgress();<br>    delete <span class="hljs-variable">_dialog_progress</span>;<br>    <span class="hljs-variable">_dialog_progress</span> =nullptr;<br>&#125;<br><br>void ProTreeWidget::SlotFinishProgress()<br>&#123;<br>    <span class="hljs-variable">_dialog_progress</span>-&gt;setValue(PROGRESS_MAX);<br>    <span class="hljs-variable">_dialog_progress</span>-&gt;deleteLater();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>最终结果如下图所示</p>
+<p><img src="/image-15.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+<h1 id="设置活动项目"><a href="#设置活动项目" class="headerlink" title="设置活动项目"></a>设置活动项目</h1><p>在ProTreeWidget的构造函数中添加连接设置活动项目的槽函数</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lisp">connect(<span class="hljs-name">_action_setstart</span>, <span class="hljs-symbol">&amp;QAction</span>:<span class="hljs-symbol">:triggered</span>, this, <span class="hljs-symbol">&amp;ProTreeWidget</span>:<span class="hljs-symbol">:SlotSetActive</span>)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+<p>SlotSetActive函数的实现：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-built_in">void</span> ProTreeWidget::SlotSetActive()<br>&#123;<br>    <span class="hljs-keyword">if</span>(!_right_btn_item)&#123;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-comment">//定义一个字体类</span><br>    QFont <span class="hljs-literal">null</span>Font;<br>    <span class="hljs-literal">null</span>Font.setBold(<span class="hljs-literal">false</span>);<br>    <span class="hljs-keyword">if</span>(_active_item)&#123;<br>        _active_item-&gt;setFont(<span class="hljs-number">0</span>,<span class="hljs-literal">null</span>Font);<br>    &#125;<br>    <br>    <span class="hljs-comment">//设置右键点击的条目为激活项目，并设置字体加粗</span><br>    _active_item = _right_btn_item;<br>    <span class="hljs-literal">null</span>Font.setBold(<span class="hljs-literal">true</span>);<br>    _active_item-&gt;setFont(<span class="hljs-number">0</span>,<span class="hljs-literal">null</span>Font);<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>效果如下图所示：</p>
+<p><img src="/image-16.png" srcset="/img/loading.gif" lazyload alt="alt text"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/QT/" class="print-no-link">#QT</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>QT电子相册项目（一）——目录树和向导</div>
+      <div>http://example.com/2024/03/30/QT电子相册项目（一）——目录树和向导/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>�Һ���˯��</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/03/30/QT%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C%EF%BC%88%E4%BA%8C%EF%BC%89%E2%80%94%E2%80%94%E6%89%93%E5%BC%80%E9%A1%B9%E7%9B%AE/" title="QT电子相册（二）打开项目">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">QT电子相册（二）打开项目</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/18/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Lambda表达式">
+                        <span class="hidden-mobile">Lambda表达式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
